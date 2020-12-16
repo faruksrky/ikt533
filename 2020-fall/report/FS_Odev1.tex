@@ -1,0 +1,176 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Odev1\_FarukSarikaya},
+  pdfauthor={Faruk Sarikaya},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Odev1\_FarukSarikaya}
+\author{Faruk Sarikaya}
+\date{12/12/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{soru-1a}{%
+\subsection{Soru 1:a)}\label{soru-1a}}
+
+\textbf{Doğum çeyreği kukla değişkenlerini oluşturunuz. Kaç adet kukla
+değişken oluşturmalısınız?}
+
+Bağlımlı Değişken : LWKLYWGE // Log weekly wage
+
+Kukla Değişkenler :EDUC (eğitim yılı), RACE, MARRIED kukla
+değişkenlerdir. SMSA Bireyler şehirde yaşıyorsa kullanılacak bir kukla
+değişkendir, ayrıca 8 adet lokasyon bazlı kukla değişkenler vardır.
+Burada lokasyon bazlı bir veri analizi yapmayacağımız için lokasyona
+dayalı kukla değişkenleri kullanmayacağız. AGE ve AGESQ (Yaşın karesi)
+denklemde YoB ile başlayan kukla değişkenler, YoB bireyin doğduğu yılı
+gösterir. Ayrıca cinsiyet değişkeni sadece erkekleri içerdiği için kukla
+değişkenlerin içerisine dahil edilmemiştir.
+
+Toplamda kukla değişken sayısı \textbf{24} adettir. Ancak analizimizde
+\textbf{15} adet kukla değişken kullanılabilir.
+
+Değişkenlerin anlaşılabilmesi için DataSet içerisinde verilen kolon
+başlıkları değiştirilmiştir.
+
+\(LWKLYWGE = \beta_0 + \beta_1EDUC_i + \beta_2RACE_i + \beta_3MARRIED_i +\)
+\(\beta_4YoB20_i + \beta_5YoB21_i +\beta_6YoB22_i + \beta_7YoB23_i + \beta_8YoB24_i + \beta_9YoB25_i + \beta_{10}YoB26_i+\)
+\(\beta_{11}YoB27_i + \beta_{12}YoB28_i + \beta_{13}YoB29_i + \beta_{14}AGE_i + \beta_{15}AGEQSQ_i\)
+
+\textbf{1. çeyrekte doğan erkeklerin 1 değeri aldığı kukla değişkeni
+araç değişken olarak kullanınız 1. çeyrekte ve diğer çeyreklerde
+doğanların ortalama haftalık ücretlerinin orta- lamaları arasındaki
+farkı bularak, bu farkın sıfırdan farklı olup olmadığını test ediniz}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm0 =}\StringTok{ }\KeywordTok{lm}\NormalTok{(PumsTable}\OperatorTok{$}\NormalTok{LWKLYWGE }\OperatorTok{~}\StringTok{ }\NormalTok{PumsTable}\OperatorTok{$}\NormalTok{EDUC }\OperatorTok{+}\StringTok{ }\NormalTok{PumsTable}\OperatorTok{$}\NormalTok{AGE, }\DataTypeTok{data =}\NormalTok{ PumsTable)}
+\NormalTok{lm1 =}\StringTok{ }\KeywordTok{lm}\NormalTok{(PumsTable}\OperatorTok{$}\NormalTok{LWKLYWGE }\OperatorTok{~}\StringTok{ }\NormalTok{PumsTable}\OperatorTok{$}\NormalTok{EDUC, }\DataTypeTok{data =}\NormalTok{ PumsTable)}
+\NormalTok{lm2 =}\StringTok{ }\KeywordTok{lm}\NormalTok{(PumsTable}\OperatorTok{$}\NormalTok{LWKLYWGE }\OperatorTok{~}\StringTok{ }\NormalTok{PumsTable}\OperatorTok{$}\NormalTok{AGE, }\DataTypeTok{data =}\NormalTok{ PumsTable)}
+\NormalTok{lm3 =}\StringTok{ }\KeywordTok{lm}\NormalTok{(PumsTable}\OperatorTok{$}\NormalTok{EDUC }\OperatorTok{~}\StringTok{ }\NormalTok{PumsTable}\OperatorTok{$}\NormalTok{AGE, }\DataTypeTok{data =}\NormalTok{ PumsTable)}
+\KeywordTok{stargazer}\NormalTok{(lm0,lm1,lm2,lm3,}\DataTypeTok{type =} \StringTok{"html"}\NormalTok{, }\DataTypeTok{style =} \StringTok{"qje"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## <table style="text-align:center"><tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="3">LWKLYWGE</td><td>EDUC</td></tr>
+## <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td><td>(4)</td></tr>
+## <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">EDUC</td><td>0.168<sup>***</sup></td><td>0.296<sup>***</sup></td><td></td><td></td></tr>
+## <tr><td style="text-align:left"></td><td>(0.002)</td><td>(0.001)</td><td></td><td></td></tr>
+## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td></tr>
+## <tr><td style="text-align:left">AGE</td><td>0.00000<sup>***</sup></td><td></td><td>0.00000<sup>***</sup></td><td>0.00000<sup>***</sup></td></tr>
+## <tr><td style="text-align:left"></td><td>(0.000)</td><td></td><td>(0.000)</td><td>(0.000)</td></tr>
+## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td></tr>
+## <tr><td style="text-align:left">Constant</td><td>8.966<sup>***</sup></td><td>8.985<sup>***</sup></td><td>9.203<sup>***</sup></td><td>1.410<sup>***</sup></td></tr>
+## <tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td><td>(0.001)</td><td>(0.001)</td></tr>
+## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td></tr>
+## <tr><td style="text-align:left"><em>N</em></td><td>1,063,634</td><td>1,063,634</td><td>1,063,634</td><td>1,063,634</td></tr>
+## <tr><td style="text-align:left">R<sup>2</sup></td><td>0.071</td><td>0.044</td><td>0.060</td><td>0.233</td></tr>
+## <tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.071</td><td>0.044</td><td>0.060</td><td>0.233</td></tr>
+## <tr><td style="text-align:left">Residual Std. Error</td><td>0.768 (df = 1063631)</td><td>0.780 (df = 1063632)</td><td>0.773 (df = 1063632)</td><td>0.495 (df = 1063632)</td></tr>
+## <tr><td style="text-align:left">F Statistic</td><td>40,635.220<sup>***</sup> (df = 2; 1063631)</td><td>48,814.620<sup>***</sup> (df = 1; 1063632)</td><td>68,067.500<sup>***</sup> (df = 1; 1063632)</td><td>322,364.500<sup>***</sup> (df = 1; 1063632)</td></tr>
+## <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Notes:</em></td><td colspan="4" style="text-align:right"><sup>***</sup>Significant at the 1 percent level.</td></tr>
+## <tr><td style="text-align:left"></td><td colspan="4" style="text-align:right"><sup>**</sup>Significant at the 5 percent level.</td></tr>
+## <tr><td style="text-align:left"></td><td colspan="4" style="text-align:right"><sup>*</sup>Significant at the 10 percent level.</td></tr>
+## </table>
+\end{verbatim}
+
+\end{document}

@@ -1,0 +1,155 @@
+---
+title: "Odev1_FarukSarikaya"
+author: "Faruk Sarikaya"
+date: "12/12/2020"
+output: 
+  html_document: default
+---
+
+## Soru / Cevap
+
+**a) Doğum çeyreği kukla değişkenlerini oluşturunuz. Kaç adet kukla değişken oluşturmalısınız?**
+
+Sorudaki ana amacımız; eğitimin getirilerine dair tahminler yapmaktır. Bu sebeple; 
+
+**Bağlımlı Değişken:** LWKLYWGE yani haftalık ücretin logaritmasıdır.
+Eğitim yılları, Yaş, Irk, Medeni Durum ve diğer bireysel düzeydeki *Kukla Değişkenler* ile analiz çalışması yapıyoruz.
+
+**Kukla Değişkenleri** olarak Eğitim Yılı, Yaş, Yaşın Karesi, Medeni Durum,Doğum Yılı, Şehirde Yaşama Durumu ve lokasyon bazlı bir çok veri alınabilir. Ancak biz Eğitim Yılı ve doğum çeyreklerini kullanarak haftalık ücreti tahmin edeceğiz ve bireysel verileri hariç tutacağız. 
+
+**1. Aşama : **  $EDUC_i$ = $\pi_0$ + $\pi_1Z_i$ + $\mu_i$
+
++ Zi          = Eğer bir birey ilk çeyrekte (Zi) doğmuşsa, bir değerini alan bir kukla değişken kullanıyoruz.
++ $\pi_1$     = ilk çeyrekte doğanların dönüş katsayısı
++ $\mu$       = Hata Katsayısı
+
+**2. Aşama : **  $LWKLYWGE_i$ = $\beta_0$ + $\beta_1Z_i$ + $\upsilon_i$
+
++ $\pi_1$     =  Doğum çeyreğinin kazançlar üzerindeki doğrudan etkisini yakalar.
+
+**3. Aşama : **  Wald tahmini ile Q1 ve Diğer Quarter bireyleri arasındaki eğitim ve kazançlardaki genel farkı gösterreceğiz.
+                
+**Wald =** $\frac{logLWKLYWGE_{Q1} - logLWKLYWGE_{Q2,3,4}}{EDUC_{Q1} - EDUC_{Q2,3,4}}$
+
+R üzerinde yazılmış kodları Readme dosyasında yer almaktadır. R çıktıları aşağıda görülebilir;
+
+
+
+```{r DataImport, echo=FALSE, error=FALSE, warning=FALSE, include=FALSE}
+library(rjson)
+library(dplyr)
+library(ggplot2)
+library(plyr)
+library(data.table)
+library(ggthemes)
+library(rdrop2)
+library(shiny)
+library(AER)
+library(stargazer)
+library(broom)
+library(kableExtra)
+library(pastecs)
+library(pander)
+library(foreign)
+
+PumsTableBase = read.dta("~/Desktop/Emek_Ekonomisi/ikt533/2020-fall/data/raw/NEW7080.dta")
+```
+```{r colnames, include=FALSE}
+colnames(PumsTableBase)[1]="AGE"
+colnames(PumsTableBase)[2]="AGEQ"
+colnames(PumsTableBase)[4]="EDUC"
+colnames(PumsTableBase)[5]="ENOCENT"
+colnames(PumsTableBase)[6]="ESOCENT"
+colnames(PumsTableBase)[9]="LWKLYWGE"
+colnames(PumsTableBase)[10]="MARRIED"
+colnames(PumsTableBase)[11]="MIDATL"
+colnames(PumsTableBase)[12]="MT"
+colnames(PumsTableBase)[13]="NEWENG"
+colnames(PumsTableBase)[16]="CENSUS"
+colnames(PumsTableBase)[18]="QOB"
+colnames(PumsTableBase)[19]="RACE"
+colnames(PumsTableBase)[20]="SMSA"
+colnames(PumsTableBase)[21]="SOATL"
+colnames(PumsTableBase)[24]="WNOCENT"
+colnames(PumsTableBase)[25]="WSOCENT"
+colnames(PumsTableBase)[27]="YOB"
+```
+```{r census_70, include=FALSE}
+PumsTable = filter(PumsTableBase, PumsTableBase$CENSUS == "70")
+PumsTable80 = filter(PumsTableBase, PumsTableBase$CENSUS == "80")
+```
+
+```{r Wald Estimate, include=FALSE}
+PumsTable$Z = (PumsTable$QOB == 2 | PumsTable$QOB == 3 | PumsTable$QOB == 4) * 1
+ttest.lwklywge <- t.test(PumsTable$LWKLYWGE ~ Z, PumsTable)
+ttest.educ     <- t.test(PumsTable$EDUC ~ Z, PumsTable)
+library(systemfit)
+sur  <- systemfit(list(first  = PumsTable$EDUC ~  Z,second = PumsTable$LWKLYWGE ~ Z),data   = PumsTable,method = "SUR")
+wald <- deltaMethod(sur,"second_Z / first_Z")
+wald.estimate <- (mean(PumsTable$lwklywge[PumsTable$Z == 1]) - mean(PumsTable$lwklywge[PumsTable$Z == 0])) /
+    +     (mean(PumsTable$educ[PumsTable$Z  == 1]) - mean(PumsTable$educ[PumsTable$Z == 0]))
+wald.se       <- wald.estimate^2 
+ols <- lm(PumsTable$LWKLYWGE ~ PumsTable$EDUC, PumsTable)
+lwklywge.row <- c(ttest.lwklywge$estimate[1],
+                   ttest.lwklywge$estimate[2],
+                   ttest.lwklywge$estimate[2] - ttest.lwklywge$estimate[1])
+educ.row     <- c(ttest.educ$estimate[1],
+                   ttest.educ$estimate[2],
+                   ttest.educ$estimate[2] - ttest.educ$estimate[1])
+wald.row.est <- c(NA, NA, wald$Estimate)
+wald.row.se  <- c(NA, NA, wald$SE)
+ols.row.est <- c(NA, NA, summary(ols)$coef["PumsTable$EDUC", 'Estimate'])
+ols.row.se  <- c(NA, NA, summary(ols)$coef["PumsTable$EDUC" , 'Std. Error'])
+table           <- rbind(lwklywge.row, educ.row,wald.row.est, wald.row.se, ols.row.est, ols.row.se)
+colnames(table) <- c("1.Çeyrekte Doğanlar",
+                     "Diğer Çeyrekte Doğanlar",
+                    "Fark")
+rownames(table) <- c("Haftalık Kazanç",
+                      "Eğitim Yılı",
+                      "Wald estimate",
+                      "Wald std hata",
+                      "OLS estimate",
+                      "OLS std hata")
+```
+```{r showing_table, results='asis'}
+table %>%
+  kbl() %>%
+  kable_styling()
+```
+
+**b) 2SLS tahminleri **
+
+Temel tarifimiz; 
+
+ **Effect of $EDUC_i$ on $LWKLYWGE_i$ =** _$\frac{Effect of Z_i on LWKLYWGE_i}{Effect of Z_i on EDUC_i}$_
+ 
+ $LWKLYWGE_i$ = $\beta_0$ + $\beta_1Z_i$ + $\upsilon_i$
+ 
+ OLS hesaplaması aşağıdaki denklemi verecek;
+ 
+$\hat{\beta_1}$ =  $\frac{\overline{LWKLYWGE}_{z=1} - \overline{LWKLYWGE}_{z=0}} {\overline{EDUC}_{z=1} - \overline{EDUC}_{z=0}}$
+
+
+**b_1) CENSUS = 70 olan veriler için 2SLS tahminleri aşağıdadır **
+
+
+```{r 2SLS_70, include = FALSE}
+fit_IV_70 = ivreg(PumsTable$LWKLYWGE ~ PumsTable$EDUC + PumsTable$AGE + PumsTable$AGEQ + PumsTable$MARRIED + factor(PumsTable$YOB) |  PumsTable$AGE + PumsTable$AGEQ + PumsTable$MARRIED +  factor(PumsTable$YOB) * factor(PumsTable$QOB), model=TRUE)
+```
+```{r 2SLS_70_result, results='asis'}
+tidy(fit_IV_70) %>% pander  
+```
+
+**70 olan veriler için 2SLS tahminlerinin yorumları:**
+
+
+
+**b_2) CENSUS = 80 olan veriler için 2SLS tahminleri aşağıdadır **
+
+```{r 2SLS_80, include = FALSE}
+fit_IV_80 = ivreg(PumsTable80$LWKLYWGE ~ PumsTable80$EDUC + PumsTable80$AGE + PumsTable80$AGEQ +  PumsTable80$MARRIED + factor(PumsTable80$YOB) |  PumsTable80$AGE + PumsTable80$AGEQ + PumsTable80$MARRIED + factor(PumsTable80$YOB) * factor(PumsTable80$QOB), model=TRUE)
+```
+```{r 2SLS_result_80}
+tidy(fit_IV_80) %>% pander  
+```
+
