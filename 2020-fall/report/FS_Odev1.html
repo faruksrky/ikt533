@@ -774,7 +774,7 @@ NA
 <p>OLS hesaplaması aşağıdaki denklemi verecek;</p>
 <p><span class="math inline">\(\hat{\beta_1}\)</span> = <span class="math inline">\(\frac{\overline{LWKLYWGE}_{z=1} - \overline{LWKLYWGE}_{z=0}} {\overline{EDUC}_{z=1} - \overline{EDUC}_{z=0}}\)</span></p>
 <p><strong>b_1) CENSUS = 70 olan veriler için 2SLS tahminleri aşağıdadır </strong></p>
-<pre class="r"><code>tidy(fit_IV_70) %&gt;% pander  </code></pre>
+<pre class="r"><code>tidy(fit_IV_70) %&gt;% pander</code></pre>
 <table>
 <colgroup>
 <col width="36%"></col>
@@ -890,6 +890,37 @@ NA
 <td align="center">0.07151</td>
 <td align="center">1.905</td>
 <td align="center">0.05678</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>tidy(linearHypothesis(fit_IV_70, c(&quot;PumsTable$AGE=0&quot;, &quot;PumsTable$AGEQ=0&quot;))) %&gt;% pander</code></pre>
+<table style="width:53%;">
+<colgroup>
+<col width="12%"></col>
+<col width="6%"></col>
+<col width="16%"></col>
+<col width="16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">res.df</th>
+<th align="center">df</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">247187</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">247185</td>
+<td align="center">2</td>
+<td align="center">5.063</td>
+<td align="center">0.07953</td>
 </tr>
 </tbody>
 </table>

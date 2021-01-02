@@ -52,7 +52,7 @@ library(pastecs)
 library(pander)
 library(foreign)
 
-PumsTableBase = read.dta("~/Desktop/Emek_Ekonomisi/ikt533/2020-fall/data/raw/NEW7080.dta")
+PumsTableBase = read.dta("~/Desktop/ikt533_Emek/ikt533/2020-fall/data/raw/NEW7080.dta")
 ```
 ```{r colnames, include=FALSE}
 colnames(PumsTableBase)[1]="AGE"
@@ -137,7 +137,11 @@ $\hat{\beta_1}$ =  $\frac{\overline{LWKLYWGE}_{z=1} - \overline{LWKLYWGE}_{z=0}}
 fit_IV_70 = ivreg(PumsTable$LWKLYWGE ~ PumsTable$EDUC + PumsTable$AGE + PumsTable$AGEQ + PumsTable$MARRIED + factor(PumsTable$YOB) |  PumsTable$AGE + PumsTable$AGEQ + PumsTable$MARRIED +  factor(PumsTable$YOB) * factor(PumsTable$QOB), model=TRUE)
 ```
 ```{r 2SLS_70_result, results='asis'}
-tidy(fit_IV_70) %>% pander  
+tidy(fit_IV_70) %>% pander
+
+tidy(linearHypothesis(fit_IV_70, c("PumsTable$AGE=0", "PumsTable$AGEQ=0"))) %>% pander
+
+
 ```
 
 **70 olan veriler için 2SLS tahminlerinin yorumları:**
@@ -152,4 +156,6 @@ fit_IV_80 = ivreg(PumsTable80$LWKLYWGE ~ PumsTable80$EDUC + PumsTable80$AGE + Pu
 ```{r 2SLS_result_80}
 tidy(fit_IV_80) %>% pander  
 ```
+
+
 
