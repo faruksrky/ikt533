@@ -17,9 +17,9 @@ library(pander)
 library(haven)
 library(tidyverse)
 library(foreign)
+library(readstata13)
 
-PumsTableBase = read.dta("~/Desktop/ikt533_Emek/ikt533/2020-fall/data/raw/NEW7080.dta")
-
+PumsTableBase = read.dta13("~/Desktop/Emek_ps1/2020-fall/data/raw/NEW7080.dta", encoding="UTF-8")
 colnames(PumsTableBase)[1]="AGE"
 colnames(PumsTableBase)[2]="AGEQ"
 colnames(PumsTableBase)[4]="EDUC"
