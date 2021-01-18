@@ -1,4 +1,4 @@
-# `2020-fall/analysis` klasörü
+# `2020-fall/analysis` klasörü # 
 
 library(rjson)
 library(dplyr)
@@ -72,7 +72,7 @@ rownames(table) <- c("Haftalık Kazanç",
                       "Wald std hata",
                       "OLS estimate",
                       "OLS std hata")
-table %>%
+()table %>%
   kbl() %>%
   kable_styling()
 
@@ -83,7 +83,7 @@ tidy(fit_IV_70) %>% pander
 
 fit_IV_80 = ivreg(PumsTable80$LWKLYWGE ~ PumsTable80$EDUC + PumsTable80$AGE + PumsTable80$AGEQ +  PumsTable80$MARRIED + factor(PumsTable80$YOB) |  PumsTable80$AGE + PumsTable80$AGEQ + PumsTable80$MARRIED + factor(PumsTable80$YOB) * factor(PumsTable80$QOB), model=TRUE)
 
-tidy(fit_IV_80) %>% pander
+  tidy(fit_IV_80) %>% pander
 
 
 
